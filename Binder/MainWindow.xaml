@@ -1,0 +1,56 @@
+﻿<Window x:Class="Binder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Binder"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Binder" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox>
+            <GroupBox.Header>
+                <TextBlock Text="CONTROLS" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" FontFamily="Montserrat"/>
+            </GroupBox.Header>
+            <StackPanel VerticalAlignment="Center">
+                <Button Content="CREATE RULE" Margin="5" FontFamily="Montserrat" Command="{Binding Creator}"/>
+                <Button Content="IMPORT RULE" Margin="5" FontFamily="Montserrat" Command="{Binding ImportRule}"/>
+                <Button Content="SHOW RULES" Margin="5" FontFamily="Montserrat" Command="{Binding ShowFolder}"/>
+                <Button Content="RELOAD RULES" Margin="5" FontFamily="Montserrat" Command="{Binding Reload}"/>
+                <Button Content="ACTIVATE ALL RULES" Margin="5" FontFamily="Montserrat" Command="{Binding SelectAll}"/>
+                <Button Content="DEACTIVATE ALL RULES" Margin="5" FontFamily="Montserrat" Command="{Binding DeselectAll}"/>
+                <Button Content="START" Margin="5" FontFamily="Montserrat" Command="{Binding Start}"/>
+                <Button Content="Stop" Margin="5" FontFamily="Montserrat" Command="{Binding Stop}" IsEnabled="{Binding IsRunning}"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Column="1">
+            <GroupBox.Header>
+                <TextBlock Text="RULES" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" FontFamily="Montserrat"/>
+            </GroupBox.Header>
+            <DataGrid ItemsSource="{Binding Rules, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Header="ACTIVE" Binding="{Binding Active}" Width="25*"/>
+                    <DataGridTextColumn Header="NAME" Binding="{Binding Name}" IsReadOnly="True" Width="75*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <materialDesign:DialogHost IsOpen="{Binding ShowCreator}" Grid.ColumnSpan="2" CloseOnClickAway="True">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding CreatorPage, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    </Grid>
+</Window>

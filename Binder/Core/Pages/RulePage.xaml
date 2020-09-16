@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Binder.Core.Pages.RulePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Binder.Core.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <StackPanel>
+            <TextBox Margin="5" Style="{StaticResource placeHolder}" Tag="NAME" Text="{Binding Name}"/>
+            <CheckBox Margin="5" Content="Contains(If the site contains the text below the rule will be triggered)" IsChecked="{Binding Contains}"/>
+            <TextBox Margin="5" Style="{StaticResource placeHolder}" Tag="SITE" Text="{Binding Site}"/>
+            <ComboBox Margin="5" HorizontalContentAlignment="Center" Text="{Binding Type}">
+                <ComboBoxItem Content="Redirect" ToolTip="Redirects the user to the site in the content below"/>
+                <ComboBoxItem Content="Download" ToolTip="Downloads the site in the content below and replaces the content with the one below"/>
+                <ComboBoxItem Content="Replace" ToolTip="Replaces the site with whatever html,json or text below" IsSelected="True"/>
+            </ComboBox>
+            <TextBox Margin="5" Style="{StaticResource placeHolder}" Tag="CONTENT" Text="{Binding Content}"/>
+            <Button Content="SAVE" Margin="5" FontFamily="Montserrat" Command="{Binding Save}"/>
+            <Button Content="CLOSE" Margin="5" FontFamily="Montserrat" Command="{Binding Close}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
